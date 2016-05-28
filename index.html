@@ -75,6 +75,94 @@
     <div class="outer">
       <section id="main">
   
+    <article id="post-动态加载脚本" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/05/28/动态加载脚本/" class="article-date">
+  <time datetime="2016-05-28T02:00:05.000Z" itemprop="datePublished">2016-05-28</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/js/">js</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/05/28/动态加载脚本/">动态加载脚本</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="一、异步加载脚本-不推荐"><a href="#一、异步加载脚本-不推荐" class="headerlink" title="一、异步加载脚本(不推荐)"></a>一、异步加载脚本(不推荐)</h2><ul>
+<li>之所以叫异步加载，是因为，在加载这些脚本的同时，主页面的脚本将会继续运行</li>
+<li><p>document.write 和 动态添加script标签都属于异步加载</p>
+</li>
+<li><p>index.html</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=<span class="string">"en"</span>&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">	&lt;meta charset=<span class="string">"UTF-8"</span>&gt;</span><br><span class="line">	&lt;title&gt;动态加载脚本&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">	/*</span><br><span class="line">		异步执行脚本 ------ 下面的程序会报错的</span><br><span class="line">		原因：在运行“动态加载js的脚本loadScript()”的同时，主页面的脚本(<span class="built_in">test</span>())将会继续运行</span><br><span class="line">	*/</span><br><span class="line"></span><br><span class="line">	//使用document.write</span><br><span class="line"></span><br><span class="line">	<span class="keyword">function</span> loadScript(url, callBack) &#123;</span><br><span class="line">		document.write(<span class="string">'&lt;script src="'</span> + url + <span class="string">'"&gt;&lt;\/script&gt;'</span>);</span><br><span class="line">		callBack();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	loadScript(<span class="string">'test.js'</span>, <span class="function"><span class="title">function</span></span>() &#123;</span><br><span class="line">		<span class="built_in">test</span>1(<span class="string">'welcome'</span>);</span><br><span class="line">	&#125;);</span><br><span class="line">	document.write(<span class="string">'&lt;script src="test.js"&gt;&lt;\/script&gt;'</span>);</span><br><span class="line">	<span class="built_in">test</span>(<span class="string">'welcome'</span>);</span><br><span class="line">&lt;/script&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>test.js</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="built_in">test</span>(str) &#123;</span><br><span class="line">	alert(str);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>上面的程序会报错，因为loadScript执行的同时，test(‘welcome’)也在执行，因此loadScript还没执行完的时候，已经执行到test了，此时test是undefined的</p>
+<hr>
+<ul>
+<li>同样的情况还在于：动态添加script标签</li>
+<li>将上面index.html里面的js替换成下面的js<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> loadScript(url) &#123;</span><br><span class="line">	var oHead = document.getElementsByTagName(<span class="string">'HEAD'</span>).item(0),</span><br><span class="line">	oScript = document.createElement(<span class="string">'script'</span>);</span><br><span class="line">	oScript.src = url;</span><br><span class="line">&#125;</span><br><span class="line">	</span><br><span class="line">loadScript(<span class="string">'./test.js'</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">test</span>(<span class="string">'welcome'</span>);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>也是同样的情况，test为undefined</p>
+<hr>
+<h1 id="二、同步加载脚本"><a href="#二、同步加载脚本" class="headerlink" title="二、同步加载脚本"></a>二、同步加载脚本</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">/*</span><br><span class="line">	大多数情况下，需要同步执行脚本</span><br><span class="line">	使用  XMLHttpRequest 对象</span><br><span class="line">*/</span><br><span class="line">var xmlhttp;</span><br><span class="line"><span class="keyword">function</span> loadXMLDoc(url) &#123;</span><br><span class="line">	xmlhttp = null;</span><br><span class="line">	<span class="keyword">if</span>(window.XMLHttpRequest) &#123;</span><br><span class="line">		//new browser</span><br><span class="line">		xmlhttp = new XMLHttpRequest();</span><br><span class="line">	&#125;<span class="keyword">else</span> <span class="keyword">if</span>(window.ActiveXObject) &#123;</span><br><span class="line">		// IE5 and IE6</span><br><span class="line">		xmlhttp = new ActiveXObject(<span class="string">'Microsoft.XMLHTTP'</span>);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span>(xmlhttp != null) &#123;</span><br><span class="line">		xmlhttp.onreadystatechange = <span class="function"><span class="title">function</span></span>() &#123;</span><br><span class="line">			<span class="keyword">if</span>(xmlhttp.readyState == 4) &#123; // 4 == loaded</span><br><span class="line">				<span class="keyword">if</span>(xmlhttp.status == 200) &#123;</span><br><span class="line">					// 200 == OK</span><br><span class="line">					addScriptToPage(xmlhttp.responseText);</span><br><span class="line"></span><br><span class="line">					//上面执行成功完之后才会执行下一步，因此属于同步执行，不会出现错误</span><br><span class="line">					<span class="built_in">test</span>(<span class="string">'welcome'</span>);</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		xmlhttp.open(<span class="string">"GET"</span>, url, <span class="literal">true</span>);</span><br><span class="line">		xmlhttp.send(null);</span><br><span class="line">	&#125;<span class="keyword">else</span> &#123;</span><br><span class="line">		alert(<span class="string">"Your browser does not support XMLHTTP."</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">//将获取到的脚本文档加载到html页面中</span><br><span class="line"><span class="keyword">function</span> addScriptToPage(txt) &#123;</span><br><span class="line">	<span class="keyword">if</span> ( txt != null )&#123; </span><br><span class="line">        var oHead = document.getElementsByTagName(<span class="string">'HEAD'</span>).item(0); </span><br><span class="line">        var oScript = document.createElement( <span class="string">"script"</span> ); </span><br><span class="line">        oScript.text = txt;</span><br><span class="line"></span><br><span class="line">        oHead.appendChild(oScript);  </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">loadXMLDoc(<span class="string">'test.js'</span>);</span><br></pre></td></tr></table></figure>
+<p><strong>上面使用XMLHttpRequest对象，便可以保证在js加载到页面之后再执行下一步操作。</strong><br><strong>缺点：将所有的js全部嵌入html页面中，不利于维护，也不利于SEO优化。脚本庞大的时候更是一个大麻烦</strong></p>
+<hr>
+<h1 id="三、使用jquery的getScript方法"><a href="#三、使用jquery的getScript方法" class="headerlink" title="三、使用jquery的getScript方法"></a>三、使用jquery的getScript方法</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$.getScript(<span class="string">'test-xmlhttp.js'</span>, <span class="keyword">function</span>(data) &#123;</span><br><span class="line">	<span class="built_in">test</span>(<span class="string">'welcome'</span>);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>使用jquery封装的getScript方法十分简单就实现了动态加载js，也解决了一，二存在的问题</li>
+<li>使用getScript方法时，在加载的js地址后面会一个时间戳字符串，以防止改js文件被缓存。所以当你再次使用getScript方法加载同一个js时，会再一次请求服务器，请求成功返回状态码依然为200，服务器仍然返回改js文件所有的内容给你。</li>
+<li>有时候，我们再次加载同一个js的时候，并不希望服务器返回一模一样的内容，这时候可以使用ajax的cache。设置了cache之后，可以将第二次请求的http状态码变成304(自从上次请求后，请求的网页未修改过。服务器返回此响应时，不会返回网页内容,可以节省宽带课开销)</li>
+<li>设置ajax缓存的方法如下：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">//使用ajax全局设置</span><br><span class="line">$.ajaxSetup(&#123;</span><br><span class="line">  cache: <span class="literal">true</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">//放弃使用getScript，直接使用比较底层的ajax方法获取脚本</span><br><span class="line">$.ajax(&#123;</span><br><span class="line">      url: <span class="string">"test.js"</span>,</span><br><span class="line">      dataType: <span class="string">"script"</span>,</span><br><span class="line">      cache: <span class="literal">true</span>    //在这里设置缓存</span><br><span class="line">&#125;).done(<span class="function"><span class="title">function</span></span>() &#123;</span><br><span class="line">  </span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><strong>就算设置了缓存，在再次加载相同的js的时候还是会出发http请求，只是请求没有返回js文件的内容</strong><br><strong>可以自己封装个函数，避免发出同样的http请求</strong></p>
+<hr>
+<h1 id="四、使用sea-js模块化加载脚本"><a href="#四、使用sea-js模块化加载脚本" class="headerlink" title="四、使用sea.js模块化加载脚本"></a>四、使用sea.js模块化加载脚本</h1><p><strong>使用原生js暂时不知道怎么解决二中的问题，但是突然发现了sea.js框架可以对js时兴模块化管理</strong><br>这里主要是先解决一下动态加载脚本的问题，sea.js的模块化管理是个大话题，以后再深入讨论</p>
+<ul>
+<li><p>index.html</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=<span class="string">"en"</span>&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">	&lt;meta charset=<span class="string">"UTF-8"</span>&gt;</span><br><span class="line">	&lt;title&gt;动态加载脚本&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;script src=<span class="string">"http://apps.bdimg.com/libs/seajs/2.3.0/sea.js"</span>&gt;&lt;/script&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">	// seajs 的简单配置</span><br><span class="line">	seajs.config(&#123;</span><br><span class="line">	  base: <span class="string">"/load-script/"</span>,  //配置加载脚本的路径</span><br><span class="line">	  <span class="built_in">alias</span>: &#123;&#125;</span><br><span class="line">	&#125;)</span><br><span class="line"></span><br><span class="line">	var num = 0;</span><br><span class="line">	<span class="built_in">set</span>Interval(<span class="function"><span class="title">function</span></span>() &#123;</span><br><span class="line">		num ++;</span><br><span class="line">		console.log(num)</span><br><span class="line">		<span class="keyword">if</span>(num &gt; 5) &#123;</span><br><span class="line">			seajs.use(<span class="string">'./test1'</span>, <span class="keyword">function</span>(<span class="built_in">test</span>1) &#123;</span><br><span class="line">				<span class="built_in">test</span>1(<span class="string">'welcome'</span>);</span><br><span class="line">			&#125;)</span><br><span class="line">			</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;, 1000);</span><br><span class="line">&lt;/script&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>test1.js</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">define(<span class="keyword">function</span>(require, exports, module) &#123;</span><br><span class="line">	<span class="keyword">function</span> <span class="built_in">test</span>1(str) &#123;</span><br><span class="line">		alert(str);</span><br><span class="line">	&#125;</span><br><span class="line">	module.exports = <span class="built_in">test</span>1;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://yoursite.com/2016/05/28/动态加载脚本/" data-id="ciord863n000160cjhc6frc5g" class="article-share-link" data-share="baidu" data-title="动态加载脚本">分享到</a>
+      
+
+      
+
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/">js</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/性能/">性能</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Angular-与外界通讯" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/04/22/Angular-与外界通讯/" class="article-date">
@@ -137,7 +225,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://yoursite.com/2016/04/22/Angular-与外界通讯/" data-id="cinbpaewi00006wcj7t6ps7ky" class="article-share-link" data-share="baidu" data-title="Angular与外界通讯,$http服务">分享到</a>
+        <a data-url="http://yoursite.com/2016/04/22/Angular-与外界通讯/" data-id="ciord867w000o60cjv3pti4hy" class="article-share-link" data-share="baidu" data-title="Angular与外界通讯,$http服务">分享到</a>
       
 
       
@@ -233,7 +321,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://yoursite.com/2016/04/17/grunt对less进行实时监听和编译/" data-id="cinbpaf1u000m6wcj0uf54mxq" class="article-share-link" data-share="baidu" data-title="grunt对less进行实时监听和编译,刷新页面">分享到</a>
+        <a data-url="http://yoursite.com/2016/04/17/grunt对less进行实时监听和编译/" data-id="ciord868w000p60cjosynzzzx" class="article-share-link" data-share="baidu" data-title="grunt对less进行实时监听和编译,刷新页面">分享到</a>
       
 
       
@@ -291,7 +379,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://yoursite.com/2016/04/16/用grunt创建一个开发用的本地测试服务器/" data-id="cinbpaeyt00056wcj0l56d7or" class="article-share-link" data-share="baidu" data-title="用grunt创建一个开发用的本地测试服务器">分享到</a>
+        <a data-url="http://yoursite.com/2016/04/16/用grunt创建一个开发用的本地测试服务器/" data-id="ciord864j000360cjbr5fr0k0" class="article-share-link" data-share="baidu" data-title="用grunt创建一个开发用的本地测试服务器">分享到</a>
       
 
       
@@ -378,7 +466,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://yoursite.com/2016/04/16/伪元素-after和-before/" data-id="cinbpaeyj00046wcjrmo2z2s9" class="article-share-link" data-share="baidu" data-title="伪元素:after和:before">分享到</a>
+        <a data-url="http://yoursite.com/2016/04/16/伪元素-after和-before/" data-id="ciord864w000560cjd7emt6wa" class="article-share-link" data-share="baidu" data-title="伪元素:after和:before">分享到</a>
       
 
       
@@ -424,7 +512,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://yoursite.com/2016/04/13/first-article-test1/" data-id="cinbpaexf00016wcjn1my5lu7" class="article-share-link" data-share="baidu" data-title="我今天刚刚升级了win10呢~~">分享到</a>
+        <a data-url="http://yoursite.com/2016/04/13/first-article-test1/" data-id="ciord862t000060cjunxszvae" class="article-share-link" data-share="baidu" data-title="我今天刚刚升级了win10呢~~">分享到</a>
       
 
       
@@ -475,7 +563,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://yoursite.com/2016/04/12/hello-world/" data-id="cinbpaf2a000n6wcj9decseh3" class="article-share-link" data-share="baidu" data-title="Hello World">分享到</a>
+        <a data-url="http://yoursite.com/2016/04/12/hello-world/" data-id="ciord869c000s60cjw95r03ql" class="article-share-link" data-share="baidu" data-title="Hello World">分享到</a>
       
 
       
@@ -497,7 +585,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">分类</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AngularJS/">AngularJS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/css/">css</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/node/">node</a><span class="category-list-count">2</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AngularJS/">AngularJS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/css/">css</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/js/">js</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/node/">node</a><span class="category-list-count">2</span></li></ul>
     </div>
   </div>
 
@@ -506,7 +594,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ajax/">ajax</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/angular/">angular</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/grunt/">grunt</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node/">node</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/服务器/">服务器</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/说说/">说说</a><span class="tag-list-count">1</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ajax/">ajax</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/angular/">angular</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/grunt/">grunt</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node/">node</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/性能/">性能</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/服务器/">服务器</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/说说/">说说</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -515,7 +603,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/ajax/" style="font-size: 10px;">ajax</a> <a href="/tags/angular/" style="font-size: 10px;">angular</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/grunt/" style="font-size: 20px;">grunt</a> <a href="/tags/js/" style="font-size: 10px;">js</a> <a href="/tags/node/" style="font-size: 20px;">node</a> <a href="/tags/服务器/" style="font-size: 10px;">服务器</a> <a href="/tags/说说/" style="font-size: 10px;">说说</a>
+      <a href="/tags/ajax/" style="font-size: 10px;">ajax</a> <a href="/tags/angular/" style="font-size: 10px;">angular</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/grunt/" style="font-size: 20px;">grunt</a> <a href="/tags/js/" style="font-size: 20px;">js</a> <a href="/tags/node/" style="font-size: 20px;">node</a> <a href="/tags/性能/" style="font-size: 10px;">性能</a> <a href="/tags/服务器/" style="font-size: 10px;">服务器</a> <a href="/tags/说说/" style="font-size: 10px;">说说</a>
     </div>
   </div>
 
@@ -524,7 +612,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a><span class="archive-list-count">6</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a><span class="archive-list-count">6</span></li></ul>
     </div>
   </div>
 
@@ -534,6 +622,10 @@
     <h3 class="widget-title">近期文章</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2016/05/28/动态加载脚本/">动态加载脚本</a>
+          </li>
         
           <li>
             <a href="/2016/04/22/Angular-与外界通讯/">Angular与外界通讯,$http服务</a>
@@ -549,10 +641,6 @@
         
           <li>
             <a href="/2016/04/16/伪元素-after和-before/">伪元素:after和:before</a>
-          </li>
-        
-          <li>
-            <a href="/2016/04/13/first-article-test1/">我今天刚刚升级了win10呢~~</a>
           </li>
         
       </ul>
