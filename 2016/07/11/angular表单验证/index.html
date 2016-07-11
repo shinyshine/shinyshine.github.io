@@ -1,0 +1,326 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>angular表单验证 | Watermelon&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="一、angular中form表单的基本结构
+form标签一定要有name值，不需要action，method等属性
+button的type必须是submit（可直接实现回车登录）1234567&amp;lt;form name=&quot;loginForm&quot;&amp;gt;	&amp;lt;div class=&quot;form-group&quot;&amp;gt;		&amp;lt;label&amp;gt;用户名：&amp;lt;/label&amp;gt;		&amp;lt;inpu">
+<meta property="og:type" content="article">
+<meta property="og:title" content="angular表单验证">
+<meta property="og:url" content="http://yoursite.com/2016/07/11/angular表单验证/index.html">
+<meta property="og:site_name" content="Watermelon's blog">
+<meta property="og:description" content="一、angular中form表单的基本结构
+form标签一定要有name值，不需要action，method等属性
+button的type必须是submit（可直接实现回车登录）1234567&amp;lt;form name=&quot;loginForm&quot;&amp;gt;	&amp;lt;div class=&quot;form-group&quot;&amp;gt;		&amp;lt;label&amp;gt;用户名：&amp;lt;/label&amp;gt;		&amp;lt;inpu">
+<meta property="og:updated_time" content="2016-07-11T10:22:19.144Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="angular表单验证">
+<meta name="twitter:description" content="一、angular中form表单的基本结构
+form标签一定要有name值，不需要action，method等属性
+button的type必须是submit（可直接实现回车登录）1234567&amp;lt;form name=&quot;loginForm&quot;&amp;gt;	&amp;lt;div class=&quot;form-group&quot;&amp;gt;		&amp;lt;label&amp;gt;用户名：&amp;lt;/label&amp;gt;		&amp;lt;inpu">
+  
+    <link rel="alternative" href="/atom.xml" title="Watermelon&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link href="//fonts.useso.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <!--[if lt IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.min.js"></script><![endif]-->
+  
+</head>
+<body>
+<div id="container">
+  <div id="wrap">
+    <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Watermelon&#39;s blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">have fun!</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/about">about</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="http://www.baidu.com/baidu" method="get" accept-charset="utf-8" class="search-form">
+          <input type="search" name="word" maxlength="20" class="search-form-input" placeholder="Search">
+          <input type="submit" value="" class="search-form-submit">
+          <input name=tn type=hidden value="bds">
+          <input name=cl type=hidden value="3">
+          <input name=ct type=hidden value="2097152">
+          <input type="hidden" name="si" value="yoursite.com">
+        </form>
+      </div>
+    </div>
+  </div>
+</header>
+    <div class="outer">
+      <section id="main"><article id="post-angular表单验证" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/07/11/angular表单验证/" class="article-date">
+  <time datetime="2016-07-11T08:48:30.000Z" itemprop="datePublished">2016-07-11</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/AngularJS/">AngularJS</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      angular表单验证
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<h2 id="一、angular中form表单的基本结构"><a href="#一、angular中form表单的基本结构" class="headerlink" title="一、angular中form表单的基本结构"></a>一、angular中form表单的基本结构</h2><ul>
+<li>form标签一定要有name值，不需要action，method等属性</li>
+<li>button的type必须是submit（可直接实现回车登录）<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;form name=<span class="string">"loginForm"</span>&gt;</span><br><span class="line">	&lt;div class=<span class="string">"form-group"</span>&gt;</span><br><span class="line">		&lt;label&gt;用户名：&lt;/label&gt;</span><br><span class="line">		&lt;input <span class="built_in">type</span>=<span class="string">"text"</span> name=<span class="string">"username"</span> class=<span class="string">"form-control"</span> /&gt;</span><br><span class="line">	&lt;/div&gt;</span><br><span class="line">	&lt;button <span class="built_in">type</span>=<span class="string">"submit"</span>&gt;登录&lt;/button&gt;</span><br><span class="line">&lt;/form&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<hr>
+<h2 id="二、开始使用angular内置指令"><a href="#二、开始使用angular内置指令" class="headerlink" title="二、开始使用angular内置指令"></a>二、开始使用angular内置指令</h2><ul>
+<li><p>ng-model<br>用于双向绑定表单的值，要注意，如果某一项没有通过验证，则该项的值不会绑定到model中</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">// 下面的测试可以简单的验证没有通过验证的表单项是不会被绑定到作用域的</span><br><span class="line">// 当然需要自己写个controller, 下面会有完整的代码</span><br><span class="line">&lt;p&gt;&#123;&#123;userdata.username&#125;&#125;&lt;/p&gt;</span><br><span class="line">&lt;form name=<span class="string">"loginForm"</span> ng-submit=<span class="string">"submitLoginForm(loginForm.<span class="variable">$valid</span>)"</span>&gt;</span><br><span class="line">	&lt;div class=<span class="string">"form-group"</span>&gt;</span><br><span class="line">		&lt;label&gt;用户名：&lt;/label&gt;</span><br><span class="line">		&lt;input ng-model=<span class="string">"userdata.username"</span> <span class="built_in">type</span>=<span class="string">"text"</span> name=<span class="string">"username"</span> class=<span class="string">"form-control"</span> /&gt;</span><br><span class="line">	&lt;/div&gt;</span><br><span class="line">	&lt;button <span class="built_in">type</span>=<span class="string">"submit"</span>&gt;登录&lt;/button&gt;</span><br><span class="line">&lt;/form&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>ng-submit和$valid</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">// 点击登录按钮或者是回车的时候，出发对应控制器的submitLoginForm方法</span><br><span class="line">// 传入的参数表示当前表单是否验证成功</span><br><span class="line">&lt;form name=<span class="string">"loginForm"</span> ng-submit=<span class="string">"submitLoginForm(loginForm.<span class="variable">$valid</span>)"</span>&gt;</span><br><span class="line">	&lt;div class=<span class="string">"form-group"</span>&gt;</span><br><span class="line">		&lt;label&gt;用户名：&lt;/label&gt;</span><br><span class="line">		&lt;input <span class="built_in">type</span>=<span class="string">"text"</span> name=<span class="string">"username"</span> class=<span class="string">"form-control"</span> /&gt;</span><br><span class="line">	&lt;/div&gt;</span><br><span class="line">	&lt;button <span class="built_in">type</span>=<span class="string">"submit"</span>&gt;登录&lt;/button&gt;</span><br><span class="line">&lt;/form&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>ng-minlength和ng-maxlength</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">// ng-minlength和ng-maxlength限制当前文本框的最大和最小长度</span><br><span class="line">// 任何一个不满足都将使得 loginForm.<span class="variable">$valid</span>的值为0</span><br><span class="line">&lt;form name=<span class="string">"loginForm"</span> ng-submit=<span class="string">"submitLoginForm(loginForm.<span class="variable">$valid</span>)"</span>&gt;</span><br><span class="line">	&lt;div class=<span class="string">"form-group"</span>&gt;</span><br><span class="line">		&lt;label&gt;用户名：&lt;/label&gt;</span><br><span class="line">		&lt;input <span class="built_in">type</span>=<span class="string">"text"</span> name=<span class="string">"username"</span> class=<span class="string">"form-control"</span> ng-minlength=<span class="string">"4"</span> ng-maxlength=<span class="string">"10"</span>/&gt;</span><br><span class="line">	&lt;/div&gt;</span><br><span class="line">	&lt;button <span class="built_in">type</span>=<span class="string">"submit"</span>&gt;登录&lt;/button&gt;</span><br><span class="line">&lt;/form&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>ng-if, required和$error,$touched</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">// 如果不满足min-length好人max-length的限制并且用户已经碰过那个输入框了</span><br><span class="line">// 就会显示p标签里面的内容</span><br><span class="line">// 可以自己试试看&lt;pre&gt;&#123;&#123;loginForm.username&#125;&#125;&lt;/pre&gt; 看看里面包含哪些信息</span><br><span class="line">&lt;form name=<span class="string">"loginForm"</span> ng-submit=<span class="string">"submitLoginForm(loginForm.<span class="variable">$valid</span>)"</span>&gt;</span><br><span class="line">	&lt;div class=<span class="string">"form-group"</span>&gt;</span><br><span class="line">		&lt;label&gt;用户名：&lt;/label&gt;</span><br><span class="line">		&lt;input ng-model=<span class="string">"userdata.username"</span> <span class="built_in">type</span>=<span class="string">"text"</span> name=<span class="string">"username"</span> class=<span class="string">"form-control"</span> ng-minlength=<span class="string">"4"</span> ng-maxlength=<span class="string">"10"</span> required/&gt;</span><br><span class="line">		&lt;p class=<span class="string">"error-red"</span> ng-if=<span class="string">"(loginForm.username.<span class="variable">$error</span>.minlength || loginForm.username.<span class="variable">$error</span>.maxlength) &amp;&amp; loginForm.username.<span class="variable">$touched</span>"</span>&gt;用户名必须在4和10之间</span><br><span class="line">		&lt;/p&gt;</span><br><span class="line">		&lt;p class=<span class="string">"error-red"</span> ng-if=<span class="string">"loginForm.username.<span class="variable">$error</span>.required &amp;&amp; loginForm.username.<span class="variable">$touched</span>"</span>&gt;用户名不能为空&lt;/p&gt;</span><br><span class="line">	&lt;/div&gt;</span><br><span class="line">	&lt;button <span class="built_in">type</span>=<span class="string">"submit"</span>&gt;登录&lt;/button&gt;</span><br><span class="line">&lt;/form&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>ng-disabled和$invalid</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">// 如果表单没有通过验证，按钮显示不可提交的状态(加上disabled属性，可以根据该属性自定义样式)</span><br><span class="line">&lt;form name=<span class="string">"loginForm"</span> ng-submit=<span class="string">"submitLoginForm(loginForm.<span class="variable">$valid</span>)"</span>&gt;</span><br><span class="line">	&lt;div class=<span class="string">"form-group"</span>&gt;</span><br><span class="line">		&lt;label&gt;用户名：&lt;/label&gt;</span><br><span class="line">		&lt;input ng-model=<span class="string">"userdata.username"</span> <span class="built_in">type</span>=<span class="string">"text"</span> name=<span class="string">"username"</span> class=<span class="string">"form-control"</span> ng-minlength=<span class="string">"4"</span> ng-maxlength=<span class="string">"10"</span> required/&gt;</span><br><span class="line">		&lt;p class=<span class="string">"error-red"</span> ng-if=<span class="string">"(loginForm.username.<span class="variable">$error</span>.minlength || loginForm.username.<span class="variable">$error</span>.maxlength) &amp;&amp; loginForm.username.<span class="variable">$touched</span>"</span>&gt;用户名必须在4和10之间</span><br><span class="line">		&lt;/p&gt;</span><br><span class="line">	&lt;/div&gt;</span><br><span class="line">	&lt;button <span class="built_in">type</span>=<span class="string">"submit"</span> ng-disabled=<span class="string">"loginForm.<span class="variable">$invalid</span>"</span>&gt;登录&lt;/button&gt;</span><br><span class="line">&lt;/form&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<hr>
+<h2 id="三、自定义指令（验证两次输入的密码是否一致）"><a href="#三、自定义指令（验证两次输入的密码是否一致）" class="headerlink" title="三、自定义指令（验证两次输入的密码是否一致）"></a>三、自定义指令（验证两次输入的密码是否一致）</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">// 在确认密码的input内应用这条指令，具体应用看最后完整版代码</span><br><span class="line">.directive(<span class="string">'compare'</span>, <span class="function"><span class="title">function</span></span>() &#123;</span><br><span class="line">	<span class="built_in">return</span> &#123;</span><br><span class="line">		strict: <span class="string">'AE'</span>,</span><br><span class="line">		scope: &#123;</span><br><span class="line">			orgText: <span class="string">'=compare'</span></span><br><span class="line">		&#125;,</span><br><span class="line">		require: <span class="string">'ngModel'</span>,</span><br><span class="line">		link: <span class="keyword">function</span>(scope, element, attr, con) &#123;</span><br><span class="line"></span><br><span class="line">			con.<span class="variable">$validators</span>.compare = <span class="keyword">function</span>(v) &#123;</span><br><span class="line">				<span class="built_in">return</span> v == scope.orgText;</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">			scope.<span class="variable">$watch</span>(<span class="string">'orgText'</span>, <span class="function"><span class="title">function</span></span>() &#123;</span><br><span class="line">				con.<span class="variable">$validate</span>();</span><br><span class="line">			&#125;)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h2 id="四、完整的表单验证代码如下"><a href="#四、完整的表单验证代码如下" class="headerlink" title="四、完整的表单验证代码如下"></a>四、完整的表单验证代码如下</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=<span class="string">"en"</span> ng-app=<span class="string">"homeApp"</span>&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">	&lt;meta charset=<span class="string">"UTF-8"</span>&gt;</span><br><span class="line">	&lt;title&gt;表单验证&lt;/title&gt;</span><br><span class="line">	&lt;script src=<span class="string">"angular.min.js"</span>&gt;&lt;/script&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body ng-controller=<span class="string">"formController"</span>&gt;</span><br><span class="line">&lt;form name=<span class="string">"loginForm"</span> ng-submit=<span class="string">"submitLoginForm(loginForm.<span class="variable">$valid</span>)"</span>&gt;</span><br><span class="line">	&lt;div class=<span class="string">"form-group"</span>&gt;</span><br><span class="line">		&lt;label&gt;用户名：&lt;/label&gt;</span><br><span class="line">		&lt;input ng-model=<span class="string">"userdata.username"</span> <span class="built_in">type</span>=<span class="string">"text"</span> name=<span class="string">"username"</span> class=<span class="string">"form-control"</span> ng-minlength=<span class="string">"4"</span> ng-maxlength=<span class="string">"10"</span> required/&gt;</span><br><span class="line">		&lt;p class=<span class="string">"error-red"</span> ng-if=<span class="string">"(loginForm.username.<span class="variable">$error</span>.minlength || loginForm.username.<span class="variable">$error</span>.maxlength) &amp;&amp; loginForm.username.<span class="variable">$touched</span>"</span>&gt;用户名必须在4和10之间</span><br><span class="line">		&lt;/p&gt;</span><br><span class="line">		&lt;p class=<span class="string">"error-red"</span> ng-if=<span class="string">"loginForm.username.<span class="variable">$error</span>.required &amp;&amp; loginForm.username.<span class="variable">$touched</span>"</span>&gt;用户名不能为空&lt;/p&gt;</span><br><span class="line">	&lt;/div&gt;</span><br><span class="line">	&lt;div class=<span class="string">"form-group"</span>&gt;</span><br><span class="line">		&lt;label&gt;密码&lt;/label&gt;</span><br><span class="line">		&lt;input ng-model=<span class="string">"userdata.pwd"</span> <span class="built_in">type</span>=<span class="string">"password"</span> name=<span class="string">"pwd"</span> required&gt;</span><br><span class="line">	&lt;/div&gt;</span><br><span class="line">	&lt;div class=<span class="string">"form-group"</span>&gt;</span><br><span class="line">		&lt;label&gt;密码&lt;/label&gt;</span><br><span class="line">		&lt;input ng-model=<span class="string">"userdata.repwd"</span> <span class="built_in">type</span>=<span class="string">"password"</span> name=<span class="string">"repwd"</span> compare=<span class="string">"userdata.pwd"</span>&gt;</span><br><span class="line">		&lt;p ng-if=<span class="string">"loginForm.repwd.<span class="variable">$error</span>.compare &amp;&amp; loginForm.repwd.<span class="variable">$touched</span>"</span>&gt;两次密码输入不一致&lt;/p&gt;</span><br><span class="line">	&lt;/div&gt;</span><br><span class="line">	&lt;button <span class="built_in">type</span>=<span class="string">"submit"</span> ng-disabled=<span class="string">"loginForm.<span class="variable">$invalid</span>"</span>&gt;登录&lt;/button&gt;</span><br><span class="line">&lt;/form&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">angular.module(<span class="string">'homeApp'</span>, [])</span><br><span class="line"></span><br><span class="line">.controller(<span class="string">'formController'</span>, <span class="keyword">function</span>(<span class="variable">$scope</span>) &#123;</span><br><span class="line">	<span class="variable">$scope</span>.userdata = &#123;&#125;</span><br><span class="line">	<span class="variable">$scope</span>.submitLoginForm = <span class="keyword">function</span>(status) &#123;</span><br><span class="line">		<span class="keyword">if</span>(status == 1) &#123;</span><br><span class="line">			//提交数据到服务器</span><br><span class="line">			console.log(<span class="variable">$scope</span>.userdata);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125; </span><br><span class="line">&#125;)</span><br><span class="line">.directive(<span class="string">'compare'</span>, <span class="function"><span class="title">function</span></span>() &#123;</span><br><span class="line">	<span class="built_in">return</span> &#123;</span><br><span class="line">		strict: <span class="string">'AE'</span>,</span><br><span class="line">		scope: &#123;</span><br><span class="line">			orgText: <span class="string">'=compare'</span></span><br><span class="line">		&#125;,</span><br><span class="line">		require: <span class="string">'ngModel'</span>,</span><br><span class="line">		link: <span class="keyword">function</span>(scope, element, attr, con) &#123;</span><br><span class="line"></span><br><span class="line">			con.<span class="variable">$validators</span>.compare = <span class="keyword">function</span>(v) &#123;</span><br><span class="line">				<span class="built_in">return</span> v == scope.orgText;</span><br><span class="line">			&#125;</span><br><span class="line"></span><br><span class="line">			scope.<span class="variable">$watch</span>(<span class="string">'orgText'</span>, <span class="function"><span class="title">function</span></span>() &#123;</span><br><span class="line">				con.<span class="variable">$validate</span>();</span><br><span class="line">			&#125;)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;)</span><br><span class="line">&lt;/script&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="五、自己尝试再试王道"><a href="#五、自己尝试再试王道" class="headerlink" title="五、自己尝试再试王道"></a>五、自己尝试再试王道</h2>
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://yoursite.com/2016/07/11/angular表单验证/" data-id="ciqhvr7ar0004ywcjj8mapmdj" class="article-share-link" data-share="baidu" data-title="angular表单验证">分享到</a>
+      
+
+      
+
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/angular/">angular</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/07/05/sublime-连接ftp服务器/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">sublime 连接ftp服务器</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+      
+      <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AngularJS/">AngularJS</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/css/">css</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/js/">js</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/node/">node</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/">工具</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ajax/">ajax</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/angular/">angular</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/grunt/">grunt</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node/">node</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工具/">工具</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/性能/">性能</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/服务器/">服务器</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/说说/">说说</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/ajax/" style="font-size: 10px;">ajax</a> <a href="/tags/angular/" style="font-size: 20px;">angular</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/grunt/" style="font-size: 20px;">grunt</a> <a href="/tags/js/" style="font-size: 20px;">js</a> <a href="/tags/node/" style="font-size: 20px;">node</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/性能/" style="font-size: 10px;">性能</a> <a href="/tags/服务器/" style="font-size: 10px;">服务器</a> <a href="/tags/说说/" style="font-size: 10px;">说说</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a><span class="archive-list-count">6</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">近期文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/07/11/angular表单验证/">angular表单验证</a>
+          </li>
+        
+          <li>
+            <a href="/2016/07/05/sublime-连接ftp服务器/">sublime 连接ftp服务器</a>
+          </li>
+        
+          <li>
+            <a href="/2016/05/28/动态加载脚本/">动态加载脚本</a>
+          </li>
+        
+          <li>
+            <a href="/2016/04/22/Angular-与外界通讯/">Angular与外界通讯,$http服务</a>
+          </li>
+        
+          <li>
+            <a href="/2016/04/17/grunt对less进行实时监听和编译/">grunt对less进行实时监听和编译,刷新页面</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">友情链接</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="http://xiguabaobao.com" target="_blank">主题作者</a>
+          </li>
+        
+          <li>
+            <a href="http://reqianduan.com" target="_blank">热前端</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+      
+    </div>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 Luo Xiaotong<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      .
+      Theme by <a href="https://github.com/xiangming/landscape-plus" target="_blank">Landscape-plus</a>
+    </div>
+  </div>
+</footer>
+  </div>
+  <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/about" class="mobile-nav-link">about</a>
+  
+</nav>
+  <!-- totop start -->
+<div id="totop">
+<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+</div>
+
+<!-- totop end -->
+
+
+<!-- 百度分享 start -->
+
+<div id="article-share-box" class="article-share-box">
+  <div id="bdshare" class="bdsharebuttonbox article-share-links">
+    <a class="article-share-weibo" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a class="article-share-weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a class="article-share-qq" data-cmd="sqq" title="分享到QQ"></a>
+    <a class="article-share-renren" data-cmd="renren" title="分享到人人网"></a>
+    <a class="article-share-more" data-cmd="more" title="更多"></a>
+  </div>
+</div>
+<script>
+  function SetShareData(cmd, config) {
+    if (shareDataTitle && shareDataUrl) {
+      config.bdText = shareDataTitle;
+      config.bdUrl = shareDataUrl;
+    }
+    return config;
+  }
+  window._bd_share_config={
+    "common":{onBeforeClick: SetShareData},
+    "share":{"bdCustomStyle":"/css/bdshare.css"}
+  };
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+<!-- 百度分享 end -->
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+</div>
+</body>
+</html>
