@@ -4,27 +4,27 @@
 <head>
   <meta charset="utf-8">
   
-  <title>用grunt创建一个开发用的本地测试服务器 | Watermelon&#39;s blog</title>
+  <title>angular中控制器之间的通信 | Watermelon&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="下面用grunt及其插件grunt-contrib-connect启动一个本地的测试服务器
-保证有node.js的环境创建pakeage.json文件打开git bash执行以下命令，然后根据需求完善package.json文件1$ npm init
-
-安装grunt及其相关插件12$ npm install grunt --save-dev$npm install grunt-contrib-c">
+  <meta name="description" content="一、向上传播事件$emit
+$on 用于加收event和data
+$emit 作用是向父级控制器传递event和data，在子控制器中触发
+在下面的代码中，对子控制器中的son进行监听，son发生变化是出发emit向上传播son的值,是的parent的值发生改变123456789101112131415161718192021222324&amp;lt;div ng-controller=&quot;parent">
 <meta property="og:type" content="article">
-<meta property="og:title" content="用grunt创建一个开发用的本地测试服务器">
-<meta property="og:url" content="http://yoursite.com/2016/04/16/用grunt创建一个开发用的本地测试服务器/index.html">
+<meta property="og:title" content="angular中控制器之间的通信">
+<meta property="og:url" content="http://yoursite.com/2016/07/12/angular中控制器之间的通信/index.html">
 <meta property="og:site_name" content="Watermelon's blog">
-<meta property="og:description" content="下面用grunt及其插件grunt-contrib-connect启动一个本地的测试服务器
-保证有node.js的环境创建pakeage.json文件打开git bash执行以下命令，然后根据需求完善package.json文件1$ npm init
-
-安装grunt及其相关插件12$ npm install grunt --save-dev$npm install grunt-contrib-c">
-<meta property="og:updated_time" content="2016-04-17T09:39:15.734Z">
+<meta property="og:description" content="一、向上传播事件$emit
+$on 用于加收event和data
+$emit 作用是向父级控制器传递event和data，在子控制器中触发
+在下面的代码中，对子控制器中的son进行监听，son发生变化是出发emit向上传播son的值,是的parent的值发生改变123456789101112131415161718192021222324&amp;lt;div ng-controller=&quot;parent">
+<meta property="og:updated_time" content="2016-07-12T08:34:11.720Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="用grunt创建一个开发用的本地测试服务器">
-<meta name="twitter:description" content="下面用grunt及其插件grunt-contrib-connect启动一个本地的测试服务器
-保证有node.js的环境创建pakeage.json文件打开git bash执行以下命令，然后根据需求完善package.json文件1$ npm init
-
-安装grunt及其相关插件12$ npm install grunt --save-dev$npm install grunt-contrib-c">
+<meta name="twitter:title" content="angular中控制器之间的通信">
+<meta name="twitter:description" content="一、向上传播事件$emit
+$on 用于加收event和data
+$emit 作用是向父级控制器传递event和data，在子控制器中触发
+在下面的代码中，对子控制器中的son进行监听，son发生变化是出发emit向上传播son的值,是的parent的值发生改变123456789101112131415161718192021222324&amp;lt;div ng-controller=&quot;parent">
   
     <link rel="alternative" href="/atom.xml" title="Watermelon&#39;s blog" type="application/atom+xml">
   
@@ -83,14 +83,14 @@
   </div>
 </header>
     <div class="outer">
-      <section id="main"><article id="post-用grunt创建一个开发用的本地测试服务器" class="article article-type-post" itemscope itemprop="blogPost">
+      <section id="main"><article id="post-angular中控制器之间的通信" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2016/04/16/用grunt创建一个开发用的本地测试服务器/" class="article-date">
-  <time datetime="2016-04-16T02:21:00.000Z" itemprop="datePublished">2016-04-16</time>
+    <a href="/2016/07/12/angular中控制器之间的通信/" class="article-date">
+  <time datetime="2016-07-12T07:51:25.000Z" itemprop="datePublished">2016-07-12</time>
 </a>
     
   <div class="article-category">
-    <a class="article-category-link" href="/categories/node/">node</a>
+    <a class="article-category-link" href="/categories/AngularJS/">AngularJS</a>
   </div>
 
   </div>
@@ -101,7 +101,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      用grunt创建一个开发用的本地测试服务器
+      angular中控制器之间的通信
     </h1>
   
 
@@ -109,30 +109,32 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>下面用grunt及其插件grunt-contrib-connect启动一个本地的测试服务器</p>
-<h2 id="保证有node-js的环境"><a href="#保证有node-js的环境" class="headerlink" title="保证有node.js的环境"></a>保证有node.js的环境</h2><h2 id="创建pakeage-json文件"><a href="#创建pakeage-json文件" class="headerlink" title="创建pakeage.json文件"></a>创建pakeage.json文件</h2><p>打开git bash执行以下命令，然后根据需求完善package.json文件<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm init</span><br></pre></td></tr></table></figure></p>
-<hr>
-<h2 id="安装grunt及其相关插件"><a href="#安装grunt及其相关插件" class="headerlink" title="安装grunt及其相关插件"></a>安装grunt及其相关插件</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ npm install grunt --save-dev</span><br><span class="line"><span class="variable">$npm</span> install grunt-contrib-connect --save-dev</span><br></pre></td></tr></table></figure>
-<hr>
-<h2 id="创建Gruntfile-js-这个文件是grunt的精华所在了"><a href="#创建Gruntfile-js-这个文件是grunt的精华所在了" class="headerlink" title="创建Gruntfile.js(这个文件是grunt的精华所在了)"></a>创建Gruntfile.js(这个文件是grunt的精华所在了)</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">module.exports = <span class="keyword">function</span>(grunt) &#123;</span><br><span class="line">	grunt.initConfig(&#123;</span><br><span class="line">		pkg: grunt.file.readJSON(<span class="string">'package.json'</span>),</span><br><span class="line">		connect: &#123;</span><br><span class="line">            server: &#123;</span><br><span class="line">                options: &#123;</span><br><span class="line">                    protocol: <span class="string">'http'</span>,</span><br><span class="line">                    port: 8000,</span><br><span class="line">                    hostname: <span class="string">'*'</span>,</span><br><span class="line">                    keepalive: <span class="literal">true</span>,</span><br><span class="line">                    open: <span class="literal">true</span>,</span><br><span class="line">                    base: [<span class="string">'./app'</span>]</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">	&#125;);</span><br><span class="line"></span><br><span class="line">	grunt.loadNpmTasks(<span class="string">'grunt-contrib-connect'</span>);</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>keepalive: 默认值为false，如果是false的话，当grunt创建完一个服务器就会自动关闭，来不及代开浏览器，创建的服务器就已经没有了。如果设置为true，可以保持connect 这个任务持续执行，服务器不会退出，才可以访问到服务器</li>
-<li>如果8000端口被占用的话，可以修改端口号，</li>
-<li>base：可以是一个字符串，或者一个数组，或者一个对象，用来表示映射到网站虚拟根目录的目标。默认是Gruntfile.js所在的目录</li>
-<li>将open设置为true，在启动服务之后，可以自动打开浏览器，此时在输入想要调试的页面地址即可；open值也可以直接是一个地址，自动打开浏览器就直接打开所填的地址。</li>
+        <hr>
+<h2 id="一、向上传播事件-emit"><a href="#一、向上传播事件-emit" class="headerlink" title="一、向上传播事件$emit"></a>一、向上传播事件$emit</h2><ul>
+<li>$on 用于加收event和data</li>
+<li>$emit 作用是向父级控制器传递event和data，在子控制器中触发</li>
+<li>在下面的代码中，对子控制器中的son进行监听，son发生变化是出发emit向上传播son的值,是的parent的值发生改变<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">&lt;div ng-controller=<span class="string">"parentCon"</span>&gt;</span><br><span class="line">	&lt;p&gt;&#123;&#123;parent&#125;&#125;&lt;/p&gt;</span><br><span class="line">	&lt;div ng-controller=<span class="string">"sonCon"</span>&gt;</span><br><span class="line">		&lt;input <span class="built_in">type</span>=<span class="string">"text"</span> ng-model=<span class="string">"son"</span> /&gt;</span><br><span class="line">	&lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">	angular.module(<span class="string">'homeApp'</span>, [])</span><br><span class="line"></span><br><span class="line">	.controller(<span class="string">'parentCon'</span>, <span class="keyword">function</span>(<span class="variable">$scope</span>) &#123;</span><br><span class="line">		<span class="variable">$scope</span>.<span class="variable">$on</span>(<span class="string">'changeParent'</span>, <span class="keyword">function</span>(event, data) &#123;</span><br><span class="line">			// event 是一个包含许多方法的对象</span><br><span class="line">			// data是子控制器传递过来的新值</span><br><span class="line">			<span class="variable">$scope</span>.parent = data;</span><br><span class="line">		&#125;)</span><br><span class="line">	&#125;)</span><br><span class="line"></span><br><span class="line">	.controller(<span class="string">'sonCon'</span>, <span class="keyword">function</span>(<span class="variable">$scope</span>) &#123;</span><br><span class="line">		<span class="variable">$scope</span>.son = <span class="string">'son'</span>;</span><br><span class="line">		<span class="variable">$scope</span>.<span class="variable">$watch</span>(<span class="variable">$scope</span>.son, <span class="function"><span class="title">function</span></span>() &#123;</span><br><span class="line">			<span class="variable">$scope</span>.<span class="variable">$emit</span>(<span class="string">'changeParent'</span>, <span class="variable">$scope</span>.son);</span><br><span class="line">		&#125;)</span><br><span class="line">	&#125;)</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+</li>
 </ul>
+<hr>
+<h2 id="二、向下传播事件-broadcast"><a href="#二、向下传播事件-broadcast" class="headerlink" title="二、向下传播事件$broadcast"></a>二、向下传播事件$broadcast</h2><ul>
+<li>$broadcast 作用是向子级控制器传递event和data，在父控制器中触发</li>
+<li>监听父控制器中的parent，发生变化触发broadcast，向子控制器传递新值<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">&lt;div ng-controller=<span class="string">"parentCon"</span>&gt;</span><br><span class="line">	&lt;input <span class="built_in">type</span>=<span class="string">"text"</span> ng-model=<span class="string">"parent"</span> /&gt;</span><br><span class="line">	&lt;div ng-controller=<span class="string">"sonCon"</span>&gt;</span><br><span class="line">		&lt;p&gt;&#123;&#123;son&#125;&#125;&lt;/p&gt;</span><br><span class="line">	&lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">	angular.module(<span class="string">'homeApp'</span>, [])</span><br><span class="line"></span><br><span class="line">	.controller(<span class="string">'parentCon'</span>, <span class="keyword">function</span>(<span class="variable">$scope</span>) &#123;</span><br><span class="line">		<span class="variable">$scope</span>.parent = <span class="string">'parent'</span>;</span><br><span class="line">		<span class="variable">$scope</span>.<span class="variable">$watch</span>(<span class="variable">$scope</span>.parent, <span class="function"><span class="title">function</span></span>() &#123;</span><br><span class="line">			<span class="variable">$scope</span>.<span class="variable">$broadcast</span>(<span class="string">'changeSon'</span>, <span class="variable">$scope</span>.parent);</span><br><span class="line">		&#125;)</span><br><span class="line">	&#125;)</span><br><span class="line"></span><br><span class="line">	.controller(<span class="string">'sonCon'</span>, <span class="keyword">function</span>(<span class="variable">$scope</span>) &#123;</span><br><span class="line">		<span class="variable">$scope</span>.<span class="variable">$on</span>(<span class="string">'changeSon'</span>, <span class="keyword">function</span>(event, data) &#123;</span><br><span class="line">			<span class="variable">$scope</span>.son = data;</span><br><span class="line">		&#125;)		</span><br><span class="line"></span><br><span class="line">	&#125;)</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<hr>
 
       
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://yoursite.com/2016/04/16/用grunt创建一个开发用的本地测试服务器/" data-id="ciqj7c2a0000rhccjkpfbew47" class="article-share-link" data-share="baidu" data-title="用grunt创建一个开发用的本地测试服务器">分享到</a>
+        <a data-url="http://yoursite.com/2016/07/12/angular中控制器之间的通信/" data-id="ciqj7c24a0001hccjzp6ff5n9" class="article-share-link" data-share="baidu" data-title="angular中控制器之间的通信">分享到</a>
       
 
       
 
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/grunt/">grunt</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/node/">node</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/服务器/">服务器</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/angular/">angular</a></li></ul>
 
     </footer>
   </div>
@@ -140,19 +142,10 @@
     
 <nav id="article-nav">
   
-    <a href="/2016/04/17/grunt对less进行实时监听和编译/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">下一篇</strong>
-      <div class="article-nav-title">
-        
-          grunt对less进行实时监听和编译,刷新页面
-        
-      </div>
-    </a>
   
-  
-    <a href="/2016/04/16/伪元素-after和-before/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2016/07/11/angular表单验证/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">上一篇</strong>
-      <div class="article-nav-title">伪元素:after和:before</div>
+      <div class="article-nav-title">angular表单验证</div>
     </a>
   
 </nav>
