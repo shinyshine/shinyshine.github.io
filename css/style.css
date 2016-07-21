@@ -115,8 +115,8 @@ button::-moz-focus-inner {
   font-family: FontAwesome;
   font-style: normal;
   font-weight: normal;
-  src: url("../font/fontawesome-webfont.eot");
-  src: url("../font/fontawesome-webfont.eot") format("embedded-opentype"), url("../font/fontawesome-webfont.woff") format("woff"), url("../font/fontawesome-webfont.ttf") format("truetype"), url("../font/fontawesome-webfont.svg") format("svg");
+  src: url("http://libs.useso.com/js/font-awesome/4.2.0/fonts/fontawesome-webfont.eot?v=#4.0.3");
+  src: url("http://libs.useso.com/js/font-awesome/4.2.0/fonts/fontawesome-webfont.eot?#iefix&v=#4.0.3") format("embedded-opentype"), url("http://libs.useso.com/js/font-awesome/4.2.0/fonts/fontawesome-webfont.woff?v=#4.0.3") format("woff"), url("http://libs.useso.com/js/font-awesome/4.2.0/fonts/fontawesome-webfont.ttf?v=#4.0.3") format("truetype"), url("http://libs.useso.com/js/font-awesome/4.2.0/fonts/fontawesome-webfont.svg#fontawesomeregular?v=#4.0.3") format("svg");
 }
 html,
 body,
@@ -124,9 +124,8 @@ body,
   height: 100%;
 }
 body {
-  font-family: "微软雅黑";
   background: #eee;
-  font: 16px/1.6em "微软雅黑", "Microsoft Yahei", "Droid Sans", Helvetica Neue, Helvetica, Arial, sans-serif;
+  font: 14px/1.6em "微软雅黑", "Microsoft Yahei", "Droid Sans", Helvetica Neue, Helvetica, Arial, sans-serif;
   -webkit-text-size-adjust: 100%;
 }
 .outer {
@@ -622,7 +621,8 @@ body {
 }
 .article-title {
   text-decoration: none;
-  font-size: 25px;
+  font-size: 2em;
+  font-weight: bold;
   color: #000;
   line-height: 1.1em;
   -webkit-transition: color 0.2s;
