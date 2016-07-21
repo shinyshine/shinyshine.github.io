@@ -622,8 +622,7 @@ body {
 }
 .article-title {
   text-decoration: none;
-  font-size: 2em;
-  font-weight: bold;
+  font-size: 25px;
   color: #000;
   line-height: 1.1em;
   -webkit-transition: color 0.2s;
