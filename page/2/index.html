@@ -75,6 +75,93 @@
     <div class="outer">
       <section id="main">
   
+    <article id="post-伪元素-after和-before" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/04/16/伪元素-after和-before/" class="article-date">
+  <time datetime="2016-04-16T01:18:16.000Z" itemprop="datePublished">2016-04-16</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/css/">css</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/04/16/伪元素-after和-before/">伪元素:after和:before</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>::before</strong> 和 <strong>::after</strong>是css中的比较常用的<strong>伪元素</strong></p>
+<hr>
+<h2 id="一、为什么使用伪元素？"><a href="#一、为什么使用伪元素？" class="headerlink" title="一、为什么使用伪元素？"></a>一、为什么使用伪元素？</h2><p>::after和::before伪元素定义和存在于css中，就说明其必定为页面的样式做出了一定的贡献。它不是真的html元素，只是在css中定义的，插入到html中的，是html页面更美观的元素而已。html失去了伪元素还是一份完整的html文档，只是失去了该伪元素定义的那份美观而已。<br>一句话，伪元素不会影响文档流。</p>
+<hr>
+<h2 id="二、-after和-after及浏览器兼容性"><a href="#二、-after和-after及浏览器兼容性" class="headerlink" title="二、:after和::after及浏览器兼容性"></a>二、:after和::after及浏览器兼容性</h2><ul>
+<li>::after是一种新语法，是为了区别伪类(:)和伪元素(::)而创建的</li>
+<li>只要是支持双冒号(::)语法的浏览器就支持单冒号(:)</li>
+<li>IE8 只支持单冒号(:), 建议使用:after 一获得大多数浏览器的支持</li>
+<li>IE8 以下不支持伪元素</li>
+</ul>
+<hr>
+<h2 id="三、-after和-before的基本用法"><a href="#三、-after和-before的基本用法" class="headerlink" title="三、:after和:before的基本用法"></a>三、:after和:before的基本用法</h2><ol>
+<li><p><strong>css选择器:before</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">.example:before &#123;</span><br><span class="line">  content: <span class="string">"#"</span>;</span><br><span class="line">.example:before &#123;</span><br><span class="line">  content: <span class="string">""</span>; //属性content绝对不可以省略,可设置为空</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>若content为空，可以把它当成一个盒子来使用。默认是内联元素，必须定义成块     级元素才能定义宽高</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">.example:before&#123;</span><br><span class="line">	content: <span class="string">""</span>; </span><br><span class="line">  	display: block; </span><br><span class="line">  	width: 100px;</span><br><span class="line">  	height: 100px;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>:before是插入到当前选择器的其他内容的前面，而不是当前选择器的前面</strong><br>可发现，插入的伪元素的内容不是在text-container外面，而是在里面，插入到text-container里面的其他内容的前面。如果非要插入到text-container前面，增加一个div即可实现</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">.text&#123;</span><br><span class="line">	height: 40px;</span><br><span class="line">	background-color: yellow;</span><br><span class="line">&#125;</span><br><span class="line">.text-container:before&#123;</span><br><span class="line">	content: <span class="string">"here's"</span>;</span><br><span class="line">	display: inline-block;</span><br><span class="line">	width: 100px;</span><br><span class="line">	height: 30px;</span><br><span class="line">	background-color: red;</span><br><span class="line">&#125;</span><br><span class="line">&lt;div class=<span class="string">"text-container"</span>&gt;</span><br><span class="line">	&lt;p class=<span class="string">"text"</span>&gt;many many many text&lt;/p&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>属性content的值不仅可以是文本内容，还可以是图片</strong><br>可是下面的方法很难操控图片，无法改变图片大小，所以更加推荐将伪元素作为一个div来使用，然后使用background来定义背景</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.image:before&#123;</span><br><span class="line">	content: url(image.png);//注意url不能加引号，不然会被解析成字符串</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>使用伪元素也可以很方面的使用字体图标，可以自定义大小和颜色</strong><br>需引入多种格式的字体文件以兼容多数浏览器</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">@font-face &#123;</span><br><span class="line">    font-family: <span class="string">'icomoon'</span>;</span><br><span class="line">    src:    url(<span class="string">'fonts/icomoon.eot?xdpdrg'</span>);</span><br><span class="line">    src:    url(<span class="string">'fonts/icomoon.eot?xdpdrg#iefix'</span>) format(<span class="string">'embedded-opentype'</span>),</span><br><span class="line">        url(<span class="string">'fonts/icomoon.ttf?xdpdrg'</span>) format(<span class="string">'truetype'</span>),</span><br><span class="line">        url(<span class="string">'fonts/icomoon.woff?xdpdrg'</span>) format(<span class="string">'woff'</span>),</span><br><span class="line">        url(<span class="string">'fonts/icomoon.svg?xdpdrg#icomoon'</span>) format(<span class="string">'svg'</span>);</span><br><span class="line">    font-weight: normal;</span><br><span class="line">    font-style: normal;</span><br><span class="line">&#125;</span><br><span class="line">.music-container&#123;</span><br><span class="line">	font-family: <span class="string">'icomoon'</span> !important;</span><br><span class="line">&#125;</span><br><span class="line">.music-container:before&#123;</span><br><span class="line">	content: <span class="string">"\e900"</span>;</span><br><span class="line">	color: red;</span><br><span class="line">	font-size: 30px;</span><br><span class="line">	margin-right: 30px;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>content的值还可以使用attr()函数来将相应属性的值转换成字符串</strong><br>attr()可以得到特定属性的值并把它作为插入的文本构成一个伪元素</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">.attr:before&#123;</span><br><span class="line">	content: attr(title);  //href</span><br><span class="line">&#125;</span><br><span class="line">&lt;div class=<span class="string">"attr"</span> title=<span class="string">"测试attr"</span>&gt;&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<hr>
+<h3 id="一些浏览器不能兼容的伪元素的属性"><a href="#一些浏览器不能兼容的伪元素的属性" class="headerlink" title="一些浏览器不能兼容的伪元素的属性"></a>一些浏览器不能兼容的伪元素的属性</h3><ul>
+<li>FireFox 3.5- 不支持伪元素的绝对定位</li>
+<li>IE8 不支持伪元素的z-index</li>
+</ul>
+<hr>
+<h3 id="需注意"><a href="#需注意" class="headerlink" title="需注意"></a>需注意</h3><p><strong>伪元素不会出现在DOM中。这些元素不是真正的元素。考虑到网页的可用性，可访问性，特别是考虑到SEO，不能用伪元素来显示网页的主要内容</strong></p>
+<hr>
+<p>这里推荐几个字体网站：<br><a href="https://icomoon.io/app/#/select" target="_blank" rel="external">IcoMoon App</a><br><a href="http://ionicons.com/" target="_blank" rel="external">Ionicons</a><br><a href="http://fontello.com/" target="_blank" rel="external">Fontello-icon fonts generator</a></p>
+<p><a href="">一些很好的:after 和 :before 的很好的实例</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://yoursite.com/2016/04/16/伪元素-after和-before/" data-id="cir4y6jdp001d2ccjr4sa8y8z" class="article-share-link" data-share="baidu" data-title="伪元素:after和:before">分享到</a>
+      
+
+      
+
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css/">css</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-first-article-test1" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/04/13/first-article-test1/" class="article-date">
@@ -106,7 +193,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://yoursite.com/2016/04/13/first-article-test1/" data-id="ciqvsjl9o0004rgcjrea77sj3" class="article-share-link" data-share="baidu" data-title="我今天刚刚升级了win10呢~~">分享到</a>
+        <a data-url="http://yoursite.com/2016/04/13/first-article-test1/" data-id="cir4y6j7900002ccjala3be2p" class="article-share-link" data-share="baidu" data-title="我今天刚刚升级了win10呢~~">分享到</a>
       
 
       
@@ -157,7 +244,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://yoursite.com/2016/04/12/hello-world/" data-id="ciqvsjlai000argcjj6j5ki4b" class="article-share-link" data-share="baidu" data-title="Hello World">分享到</a>
+        <a data-url="http://yoursite.com/2016/04/12/hello-world/" data-id="cir4y6j9800072ccjsievdac2" class="article-share-link" data-share="baidu" data-title="Hello World">分享到</a>
       
 
       
@@ -210,7 +297,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a><span class="archive-list-count">6</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a><span class="archive-list-count">6</span></li></ul>
     </div>
   </div>
 
@@ -220,6 +307,10 @@
     <h3 class="widget-title">近期文章</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2016/07/22/基于iscroll模拟原生应用中的下拉刷新和下拉加载更多/">基于iscroll模拟原生应用中的下拉刷新和下拉加载更多</a>
+          </li>
         
           <li>
             <a href="/2016/07/20/微信分享链接自定义标题，图标和摘要/">微信分享链接自定义标题，图标和摘要</a>
@@ -235,10 +326,6 @@
         
           <li>
             <a href="/2016/07/11/angular表单验证/">angular表单验证</a>
-          </li>
-        
-          <li>
-            <a href="/2016/07/05/sublime-连接ftp服务器/">sublime 连接ftp服务器</a>
           </li>
         
       </ul>
